@@ -1,0 +1,25 @@
+package hellolib
+
+import "testing"
+
+func call() {
+	m.Lock()
+	m.Unlock()
+}
+
+func deferCall() {
+	m.Lock()
+	defer m.Unlock()
+}
+
+func BenchmarkCall(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		call()
+	}
+}
+
+func BenchmarkDefer(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		deferCall()
+	}
+}
